@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Verdana, sans-serif;
+}
+
+/* BACKGROUND */
+body{
+    background:#0b1220;
+    color:#e2e8f0;
+    display:flex;
+}
+
+/* SIDE NAV (NEW STYLE) */
+nav{
+    width:85px;
+    height:100vh;
+    background:#111827;
+    position:fixed;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:15px 0;
+}
+
+.navs{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+}
+
+.navs h1{
+    font-size:11px;
+    color:#38bdf8;
+    margin-bottom:10px;
+}
+
+nav a{
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+}
+
+nav a.active{
+    color:#38bdf8;
+}
+
+/* LOGOUT */
+.logout{
+    margin-top:auto;
+    padding-bottom:15px;
+}
+
+.logout a{
+    color:#fb7185;
+    font-size:11px;
+    text-decoration:none;
+}
+
+/* MAIN AREA */
+main{
+    margin-left:100px;
+    width:100%;
+    padding:25px;
+}
+
+/* HEADER BOX */
+h2{
+    font-size:22px;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+/* TABLE WRAPPER CARD */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#1e293b;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* HEADER */
+th{
+    background:#0f172a;
+    color:#38bdf8;
+    padding:14px;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* ROWS */
+td{
+    padding:12px;
+    font-size:12px;
+    color:#e2e8f0;
+    border-bottom:1px solid #334155;
+}
+
+tr:hover{
+    background:#0f172a;
+    transition:0.2s;
+}
+</style>
+
+<body>
+
+<nav>
+    <div class="navs">
+        <h1>INV</h1>
+
+        <a href="/dashboard"><i class="fa fa-home"></i>Dash</a>
+        <a href="/employee"><i class="fa fa-users"></i>Emp</a>
+        <a href="/devices"><i class="fa fa-laptop"></i>Dev</a>
+        <a href="/department"><i class="fa fa-building"></i>Dep</a>
+        <a href="/assegnment"><i class="fa fa-list"></i>Asg</a>
+        <a class="active" href="/history"><i class="fa fa-clock"></i>His</a>
+    </div>
+
+    <div class="logout">
+        <a href="/logout"><i class="fa fa-right-from-bracket"></i></a>
+    </div>
+</nav>
+
+<main>
+    <h2>Audit History</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Action</th>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Device</th>
+                <th>Employee</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="log,i : ${logs}">
+                <td th:text="${i.index + 1}"></td>
+                <td th:text="${log.action}"></td>
+                <td th:text="${log.timestamp}"></td>
+                <td th:text="${log.performedBy}"></td>
+                <td th:text="${log.device.serialNumber}"></td>
+                <td th:text="${log.employee.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</main>
+
+</body>
+</html>

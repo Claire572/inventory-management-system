@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Assignment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Verdana, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    display:flex;
+}
+
+/* SIDE FLOAT NAV */
+nav{
+    width:90px;
+    height:100vh;
+    background:#111827;
+    position:fixed;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:20px;
+    gap:20px;
+}
+
+.navs{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    align-items:center;
+}
+
+.navs h1{
+    font-size:12px;
+    color:#60a5fa;
+    margin-bottom:20px;
+}
+
+nav a{
+    color:#94a3b8;
+    font-size:11px;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+}
+
+nav a.active{
+    color:#38bdf8;
+}
+
+.logout{
+    margin-top:auto;
+    padding-bottom:20px;
+}
+
+main{
+    margin-left:120px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+/* CARD FORM */
+.form form{
+    background:#1e293b;
+    padding:25px;
+    width:420px;
+    border-radius:16px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:10px;
+    color:#38bdf8;
+}
+
+label{
+    font-size:12px;
+    color:#cbd5e1;
+}
+
+input, select{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#0f172a;
+    color:white;
+    outline:none;
+}
+
+button{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#38bdf8;
+    cursor:pointer;
+    color:black;
+    font-weight:bold;
+}
+</style>
+
+<body>
+
+<nav>
+<div class="navs">
+<h1>INV</h1>
+
+<a href="/dashboard"><i class="fa fa-home"></i>Dash</a>
+<a href="/employee"><i class="fa fa-users"></i>Emp</a>
+<a href="/devices"><i class="fa fa-laptop"></i>Dev</a>
+<a href="/department"><i class="fa fa-building"></i>Dep</a>
+<a class="active" href="/assegnment"><i class="fa fa-list"></i>Asg</a>
+<a href="/history"><i class="fa fa-clock"></i>His</a>
+</div>
+
+<div class="logout">
+<a href="/logout"><i class="fa fa-right-from-bracket"></i></a>
+</div>
+</nav>
+
+<main class="form">
+<form th:action="@{/assignment/save}" method="post" th:object="${assegnment}">
+<h2>Assignment</h2>
+
+<input type="date" th:field="*{issueDate}">
+<input type="date" th:field="*{returnDate}">
+
+<select th:field="*{status}">
+<option>ISSUED</option>
+<option>RETURNED</option>
+<option>OVERDUE</option>
+</select>
+
+<select th:field="*{device}">
+<option th:each="dev:${device}" th:value="${dev.id}" th:text="${dev.serialNumber}"></option>
+</select>
+
+<select th:field="*{employee}">
+<option th:each="emp:${employee}" th:value="${emp.id}" th:text="${emp.name}"></option>
+</select>
+
+<button>Save</button>
+</form>
+</main>
+
+</body>
+</html>

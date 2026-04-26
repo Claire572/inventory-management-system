@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Account</title>
+</head>
+
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #1f2937, #0f172a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* background shapes */
+body::before{
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: #22c55e;
+    filter: blur(120px);
+    top: -100px;
+    left: -100px;
+    opacity: 0.3;
+}
+
+body::after{
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: #3b82f6;
+    filter: blur(120px);
+    bottom: -100px;
+    right: -100px;
+    opacity: 0.3;
+}
+
+/* container */
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* main card */
+.auth{
+    width: 900px;
+    height: 520px;
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+}
+
+/* left side */
+.first{
+    width: 55%;
+    background: rgba(255,255,255,0.08);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    color: white;
+}
+
+/* right side */
+.second{
+    width: 45%;
+    background: linear-gradient(135deg, #22c55e, #3b82f6);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+/* title */
+h1{
+    position: absolute;
+    top: 30px;
+    color: white;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+h2{
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* form */
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* inputs floating style */
+input, select{
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    transition: 0.3s;
+}
+
+input::placeholder{
+    color: rgba(255,255,255,0.7);
+}
+
+input:focus, select:focus{
+    background: rgba(255,255,255,0.25);
+}
+
+/* button */
+button{
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #0ea5e9;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    transform: scale(1.05);
+    background: #0284c7;
+}
+
+/* right side text */
+.second p{
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+/* link button */
+.second a{
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px;
+    background: white;
+    color: #0f172a;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.second a:hover{
+    background: #e2e8f0;
+}
+</style>
+
+<body>
+
+<main>
+
+<h1>Inventory System</h1>
+
+<section class="auth">
+
+<section class="first">
+    <h2>Create Account</h2>
+
+    <form th:action="@{/register/save}" method="post" th:object="${user}">
+        <input type="text" th:field="*{username}" placeholder="Username" required />
+        <input type="password" th:field="*{password}" placeholder="Password" required />
+
+        <select th:field="*{role}">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+
+        <button type="submit">Create Account</button>
+    </form>
+</section>
+
+<section class="second">
+    <h2>Welcome Back</h2>
+    <p>
+        Join the system and manage devices, employees, and departments in a modern way.
+        This platform helps you stay organized and efficient.
+    </p>
+
+    <a href="/login">Go to Login</a>
+</section>
+
+</section>
+
+</main>
+
+</body>
+</html>
